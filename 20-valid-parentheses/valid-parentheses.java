@@ -11,7 +11,7 @@ class Solution {
                 else return false;
             }
         }
-        if(st.size()!=0) return false;
+        if(!st.isEmpty()) return false;
         return true;
 
     }
