@@ -1,15 +1,18 @@
 class Solution {
     public boolean isSubsequence(String s, String t) {
         if(s.length()==0) return true;
-        // if(s.length()==t.length()) return s.equals(t);  
+        int n = t.length(),m=s.length();
         int i=0,j=0;
-        while(i<s.length() && j<t.length()){
-            if(s.charAt(i)==t.charAt(j)){
-                j++;
-                i++;
-            }else{j++;}
+        while(i<n){
+        if(t.charAt(i)==s.charAt(j)){
+            j++;
         }
-        if(i==s.length()&&j<t.length()+1) return true;
+        i++;
+        
+        if(j==m)
+            return true;
+        }
+
         return false;
     }
 }
