@@ -1,8 +1,14 @@
 class Solution {
+    public boolean isPresent(char c,String r){
+        for(char ch:r.toCharArray()){
+            if(ch==c) return true;
+        }
+        return false;
+    }
     public boolean check(String s,String r){
         s = s.toLowerCase();
         for(char c:s.toCharArray()){
-            if(r.indexOf(c)==-1) return false;
+            if(!isPresent(c,r)) return false;
         }
         return true;
     }
