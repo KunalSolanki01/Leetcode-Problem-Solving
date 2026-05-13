@@ -9,15 +9,15 @@ class Solution {
             if(tokens[i]<=power){
                 ans++;
                 power-=tokens[i++];
-                //max = Math.max(max,ans);
+                // max = Math.max(max,ans);
             }
             else if(ans>0){
                 ans--;
                 power+=tokens[j--];
             }
             else break;
-            System.out.print(power+" ");
-                max = Math.max(max,ans);
+            // System.out.print(power+" ");
+            max = Math.max(max,ans);
         }
         return max;
     }
