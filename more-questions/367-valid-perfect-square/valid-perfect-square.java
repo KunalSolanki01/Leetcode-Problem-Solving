@@ -9,13 +9,10 @@ class Solution {
             else h = mid-1;
         }
         return false;
-
-
         // if(num >= 0){
         //     int a = (int)Math.sqrt(num);
         //     return (a*a == num);
         // }
         // return false;
-
     }
 }
