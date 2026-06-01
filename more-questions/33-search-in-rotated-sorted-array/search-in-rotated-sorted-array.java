@@ -2,9 +2,7 @@ class Solution {
     public int search(int[] nums, int target) {
         int n=nums.length;
         int l=0,h=n-1;
-        int count = 0;
         while(l<=h){
-            System.out.println(count);
             int mid = l+(h-l)/2;
             if(nums[mid]==target) return mid;
             else if(nums[l]<=nums[mid]){
@@ -15,7 +13,6 @@ class Solution {
                 if(target>nums[mid] && target<=nums[h]) l=mid+1;
                 else h=mid-1;
             }
-            count++;
         }
 
         // int peak = 0;
