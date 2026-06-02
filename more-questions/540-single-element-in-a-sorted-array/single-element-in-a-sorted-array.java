@@ -11,10 +11,6 @@ class Solution {
             }
             if(arr[mid]==arr[mid+1]) l = mid+2;
             else h = mid;
-            // else{
-            //     if(mid<n && arr[mid]==arr[mid+1]) l=mid+2;
-            //     else h = mid;
-            // }
         }
         return arr[h];
     }
