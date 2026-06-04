@@ -12,12 +12,12 @@ class Solution {
             for(int i=0;i<n;i++){
                 cur += (candies[i]/candy);
             }
-            if(k<=cur){
-                s = candy+1;
-                ans = candy;
+            if(k>cur){
+                e = candy-1;
             }
             else{ 
-                e = candy-1;
+                s = candy+1;
+                ans = candy;
             }
         }
         return (int)ans;
