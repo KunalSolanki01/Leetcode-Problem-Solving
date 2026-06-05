@@ -1,11 +1,10 @@
 class Solution {
     public int maximumCandies(int[] candies, long k) {
-        int s = 0,e = Integer.MAX_VALUE;
+        int s = 1,e = Integer.MAX_VALUE;
         int n = candies.length;
         int ans = 0;
         while(s<=e){
             int candy = s+(e-s)/2;
-            if(candy==0) break;
             long cur = 0;
             for(int i=0;i<n;i++){
                 cur += (candies[i]/candy);
