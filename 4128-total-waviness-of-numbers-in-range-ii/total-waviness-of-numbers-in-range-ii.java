@@ -1,7 +1,5 @@
 class Solution {
-    // directions
     static final int NONE = 0, UP = 1, DOWN = 2, FLAT = 3;
-
     int[] digits;
     Map<Long, long[]> memo;
 
@@ -13,32 +11,24 @@ class Solution {
         if (num <= 0)
             return 0;
         memo = new HashMap<>();
-
-        // split num into digits
         String s = Long.toString(num);
         digits = new int[s.length()];
         for (int i = 0; i < s.length(); i++) {
             digits[i] = s.charAt(i) - '0';
         }
-
         return dp(0, 0, NONE, true, false)[1];
     }
-
-    // returns [count of numbers, total waviness sum]
     long[] dp(int pos, int prev, int dir, boolean tight, boolean started) {
         if (pos == digits.length) {
             return new long[] { started ? 1 : 0, 0 };
         }
-
         long key = ((long) pos * 10 + prev) * 4 + dir;
         key = key * 2 + (tight ? 1 : 0);
         key = key * 2 + (started ? 1 : 0);
         if (memo.containsKey(key))
             return memo.get(key);
-
         int limit = tight ? digits[pos] : 9;
         long count = 0, waveSum = 0;
-
         for (int d = 0; d <= limit; d++) {
             boolean newTight = tight && (d == limit);
             boolean newStarted = started || (d != 0);
