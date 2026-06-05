@@ -1,52 +1,76 @@
 class Solution {
+    // directions
+    static final int NONE = 0, UP = 1, DOWN = 2, FLAT = 3;
+
+    int[] digits;
+    Map<Long, long[]> memo;
+
     public long totalWaviness(long num1, long num2) {
         return solve(num2) - solve(num1 - 1);
     }
 
-    private long solve(long n) {
-        if (n < 100) return 0;
-        String s = String.valueOf(n);
-        int len = s.length();
-        Long[][][][][][] memo = new Long[len][11][11][2][2][2];
-        return count(s, 0, 10, 10, 0, 0, 1, memo);
+    long solve(long num) {
+        if (num <= 0)
+            return 0;
+        memo = new HashMap<>();
+
+        // split num into digits
+        String s = Long.toString(num);
+        digits = new int[s.length()];
+        for (int i = 0; i < s.length(); i++) {
+            digits[i] = s.charAt(i) - '0';
+        }
+
+        return dp(0, 0, NONE, true, false)[1];
     }
 
-    private long count(String s, int idx, int prev, int pprev, int isLess, int started, int tight, Long[][][][][][] memo) {
-        if (idx == s.length()) return 0;
-        if (memo[idx][prev][pprev][isLess][started][tight] != null) 
-            return memo[idx][prev][pprev][isLess][started][tight];
+    // returns [count of numbers, total waviness sum]
+    long[] dp(int pos, int prev, int dir, boolean tight, boolean started) {
+        if (pos == digits.length) {
+            return new long[] { started ? 1 : 0, 0 };
+        }
 
-        long ans = 0;
-        int limit = tight == 1 ? s.charAt(idx) - '0' : 9;
+        long key = ((long) pos * 10 + prev) * 4 + dir;
+        key = key * 2 + (tight ? 1 : 0);
+        key = key * 2 + (started ? 1 : 0);
+        if (memo.containsKey(key))
+            return memo.get(key);
+
+        int limit = tight ? digits[pos] : 9;
+        long count = 0, waveSum = 0;
 
         for (int d = 0; d <= limit; d++) {
-            int nextTight = (tight == 1 && d == limit) ? 1 : 0;
-            int nextStarted = (started == 1 || d > 0) ? 1 : 0;
-            
-            int waviness = 0;
-            if (started == 1 && pprev != 10) {
-                if (prev > pprev && prev > d) waviness = 1;
-                else if (prev < pprev && prev < d) waviness = 1;
+            boolean newTight = tight && (d == limit);
+            boolean newStarted = started || (d != 0);
+            int newPrev, newDir;
+            if (!newStarted) {
+                newPrev = 0;
+                newDir = NONE;
+            } else if (!started) {
+                newPrev = d;
+                newDir = NONE;
+            } else {
+                newPrev = d;
+                if (d > prev)
+                    newDir = UP;
+                else if (d < prev)
+                    newDir = DOWN;
+                else
+                    newDir = FLAT;
             }
-
-            if (waviness == 1) {
-                ans += countNumbers(s, idx + 1, nextTight);
+            long extra = 0;
+            if (started) {
+                if (dir == UP && d < prev)
+                    extra = 1;
+                if (dir == DOWN && d > prev)
+                    extra = 1;
             }
-            
-            ans += count(s, idx + 1, d, (started == 1 ? prev : 10), isLess, nextStarted, nextTight, memo);
+            long[] sub = dp(pos + 1, newPrev, newDir, newTight, newStarted);
+            count += sub[0];
+            waveSum += sub[1] + extra * sub[0];
         }
-        return memo[idx][prev][pprev][isLess][started][tight] = ans;
-    }
-
-    private long countNumbers(String s, int idx, int tight) {
-        if (idx == s.length()) return 1;
-        if (tight == 0) return (long) Math.pow(10, s.length() - idx);
-        
-        long count = 0;
-        int limit = s.charAt(idx) - '0';
-        for (int d = 0; d <= limit; d++) {
-            count += countNumbers(s, idx + 1, (d == limit ? 1 : 0));
-        }
-        return count;
+        long[] res = new long[] { count, waveSum };
+        memo.put(key, res);
+        return res;
     }
 }
