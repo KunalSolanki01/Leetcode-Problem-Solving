@@ -1,26 +1,27 @@
 class Solution {
+    public boolean isP(int []nums,int k,int mid){
+        int day = 1;
+        int cur = mid;
+        for(int i:nums){
+            if(cur<i){
+                day++;
+                cur = mid;
+            }
+            cur-=i;
+        }
+        if(day<=k) return true;
+        return false;
+    }
     public int shipWithinDays(int[] weights, int days) {
         int n = weights.length;
         int max = 0;
         for(int i:weights) max = Math.max(max,i);
-        int l = max,h = Integer.MAX_VALUE,ans = Integer.MAX_VALUE;
+        int l = max,h = Integer.MAX_VALUE;
         while(l<=h){
             int capacity = l+(h-l)/2;
-            int totalDays= 1;
-            int cur = capacity;
-            for(int i=0;i<n;i++){
-                if(cur<weights[i]){
-                    totalDays++;
-                    cur = capacity;
-                }
-                cur-=weights[i];
-            }
-            if(totalDays<=days){
-                ans=capacity;
-                h=capacity-1;
-            }
+            if(isP(weights,days,capacity)) h = capacity-1;
             else l = capacity+1;
         }
-        return ans;
+        return l;
     }
 }
