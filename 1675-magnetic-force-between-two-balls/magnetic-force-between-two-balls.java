@@ -1,4 +1,16 @@
 class Solution {
+    public boolean isP(int []nums,int k,int mid){
+        int cur = nums[0];
+        int s = 1;
+        for(int i:nums){
+            if(Math.abs(cur-i)>=mid){
+                s++;
+                cur = i;
+            }
+        }
+        if(s>=k) return false;
+        return true;
+    }
     public int maxDistance(int[] position, int m) {
         int n = position.length;
         Arrays.sort(position);
@@ -6,22 +18,9 @@ class Solution {
         int ans = -1;
         while(s<=e){
             int mid = s+(e-s)/2;
-            int cur = position[0];
-            int ball = 1;
-            for(int i=1;i<n;i++){
-                if(Math.abs(cur-position[i])>=mid){
-                    ball++;
-                    cur = position[i];
-                }
-            }
-            if(ball>=m){
-                ans = mid;
-                s = mid+1;
-            }
-            else{
-                e = mid-1;
-            }
+            if(isP(position,m,mid)) e = mid-1;
+            else s = mid+1;
         }
-        return ans;
+        return e;
     }
 }
