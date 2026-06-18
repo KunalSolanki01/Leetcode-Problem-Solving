@@ -2,12 +2,12 @@ class Solution {
     public boolean isPossible(int []arr,int k,int mid){
         int sCount = 1;
         int cur = 0;
-        for(int page:arr){
-            if(page>mid) return false;
-            if(cur+page<=mid) cur+=page;
+        for(int i:arr){
+            if(i>mid) return false;
+            if(cur+i<=mid) cur+=i;
             else{
                 sCount++;
-                cur=page;
+                cur=i;
             }
         }
         if(sCount>k)return false;
