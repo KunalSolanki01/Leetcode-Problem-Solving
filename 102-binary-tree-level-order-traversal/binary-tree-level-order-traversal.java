@@ -15,11 +15,10 @@
  */
 class Solution {
     public List<List<Integer>> levelOrder(TreeNode root) {
-        if(root==null) {
-            List<List<Integer>> temp = new ArrayList<>();
-            return temp;
-        }
         List<List<Integer>> ans = new ArrayList<>();
+        if(root==null) {
+            return ans;
+        }
         Queue<TreeNode> q = new ArrayDeque<>();
         q.add(root);
         while(q.size()>0){
