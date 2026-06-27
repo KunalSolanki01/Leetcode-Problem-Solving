@@ -6,23 +6,13 @@ class Solution {
         }
         String[] arr = new String[row];
         Arrays.fill(arr,"");
-        boolean fwd = true;
+        boolean fwd = false;
         int idx = 0;
         for(int i=0;i<n;i++){
             char c = s.charAt(i);
-            if(fwd){
-                arr[idx++]+=c;
-                if(idx==row){
-                    idx=row-2;
-                    fwd = false;
-                }
-            }else{
-                arr[idx--]+=c;
-                if(idx==-1){
-                    idx = 1;
-                    fwd = true;
-                }
-            }
+            arr[idx]+=c;
+            if(idx==0 || idx==row-1) fwd=!fwd;
+            idx+=(fwd?+1:-1);
         }
         String ans = "";
         for(String k:arr) ans+=k;
