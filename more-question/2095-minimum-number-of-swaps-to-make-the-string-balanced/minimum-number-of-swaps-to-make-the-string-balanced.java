@@ -7,6 +7,7 @@ class Solution {
                 if(count>0) count--;
             }
         }
+        System.gc();
         return (count+1)/2;
     }
 }
