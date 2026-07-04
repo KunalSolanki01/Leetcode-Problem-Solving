@@ -15,6 +15,7 @@ class Solution {
             return image;
         }
         helper(image,sr,sc,color,val);
+        System.gc();
         return image;
     }
 }
