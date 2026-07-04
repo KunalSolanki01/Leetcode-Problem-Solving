@@ -17,7 +17,10 @@ class Solution {
     }
     public int findTargetSumWays(int[] nums, int target) {
         count = 0;
-        helper(nums,target,Arrays.stream(nums).sum(),0,0);
+        int sum = 0;
+        for(int i:nums) sum+=i;
+        helper(nums,target,sum,0,0);
+        // helper(nums,target,Arrays.stream(nums).sum(),0,0);
         return count;
     }
 }
