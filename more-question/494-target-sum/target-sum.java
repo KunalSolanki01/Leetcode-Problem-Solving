@@ -2,8 +2,8 @@ class Solution {
     static int count = 0;
     public void helper(int []nums,int target,int sum,int idx,int cur){
         if(idx==nums.length){
-            if((sum+target)%2!=0) return;
-            if(cur==(sum+target)/2) count++;
+            // if((sum+target)%2!=0) return;
+            if(2*cur==(sum+target)) count++;
             return;
         }
         helper(nums,target,sum,idx+1,cur+nums[idx]);
@@ -21,6 +21,7 @@ class Solution {
         for(int i:nums) sum+=i;
         helper(nums,target,sum,0,0);
         // helper(nums,target,Arrays.stream(nums).sum(),0,0);
+        System.gc();
         return count;
     }
 }
