@@ -4,8 +4,9 @@ class Solution {
             if(sum==n) ans.add(new ArrayList<>(temp));
             return;
         }
-        if(temp.size()>k || sum>n) return;
+        // if(temp.size()>k || sum>n) return;
         for(int i=idx;i<=9;i++){
+            if(temp.size()>k || sum>n) break;
             temp.add(i);
             helper(i+1,sum+i,temp,ans,k,n);
             temp.remove(temp.size()-1);
