@@ -10,6 +10,7 @@ class Solution {
                 if(temp>=low && temp<=high) ans.add(temp);
             }
         }
+        System.gc();
         return ans;
     }
 }
