@@ -17,7 +17,8 @@ class Solution {
             else st.push(Integer.parseInt(s));
         }
         int sum = 0;
-        for(int i:st) sum+=i;
+        // for(int i:st) sum+=i;
+        while(!st.isEmpty()) sum+=st.pop();
         return sum;
     }
 }
