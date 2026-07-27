@@ -1,5 +1,5 @@
 class RecentCounter {
-    Deque<Integer> q;
+    Queue<Integer> q;
     public RecentCounter() {
         q = new ArrayDeque<>();
     }
