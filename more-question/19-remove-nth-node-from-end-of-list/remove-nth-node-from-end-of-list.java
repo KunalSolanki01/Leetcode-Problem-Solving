@@ -22,8 +22,9 @@ class Solution {
             fast = fast.next;
             slow = slow.next;
         }
+        ListNode temp = slow.next;
         slow.next = slow.next.next;
-        System.gc();
+        temp.next = null;
         // return temp.next;
         return head;
     }
