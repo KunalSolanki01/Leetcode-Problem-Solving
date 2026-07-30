@@ -23,6 +23,7 @@ class Solution {
             slow = slow.next;
         }
         slow.next = slow.next.next;
+        System.gc();
         // return temp.next;
         return head;
     }
