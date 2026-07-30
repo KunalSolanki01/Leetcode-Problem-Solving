@@ -25,8 +25,8 @@ class Solution {
         ListNode temp = slow.next;
         slow.next = slow.next.next;
         temp.next = null;
-        System.gc();
-        // return temp.next;
+        // System.gc();
+        // // return temp.next;
         return head;
     }
 }
