@@ -16,6 +16,7 @@ class Solution {
             fast = fast.next.next;
             slow = slow.next;
         }
+        System.gc();
         return slow;
     }
 }
