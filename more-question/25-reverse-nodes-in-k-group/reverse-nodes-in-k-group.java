@@ -28,36 +28,61 @@
 //     }
 // }
 
+// class Solution {
+//     public ListNode reverseList(ListNode head) {
+//         ListNode prev = null;
+//         ListNode current = head;
+//         while (current != null) {
+//             ListNode temp = current.next; 
+//             current.next = prev; 
+//             prev = current; 
+//             current = temp; 
+//         }
+//         return prev;
+//     }
+//     public ListNode reverseKGroup(ListNode head, int k) {
+//         if(head == null || head.next == null || k <= 0) return head;
+//         ListNode dummy = new ListNode(0);
+//         dummy.next = head;
+//         ListNode curr = dummy;
+//         while(curr != null){
+//            ListNode temp = curr;
+//            for(int i = 0; i < k; i++){
+//                 temp = temp.next;
+//                 if(temp == null) return dummy.next;
+//            }
+//            ListNode st = curr.next;
+//            ListNode nst = temp.next;
+//            temp.next = null;
+//            curr.next = reverseList(st);
+//            st.next = nst;
+//            curr = st;
+//         }
+//         return dummy.next;
+//     }
+// }
+
 class Solution {
-    public ListNode reverseList(ListNode head) {
-        ListNode prev = null;
-        ListNode current = head;
-        while (current != null) {
-            ListNode temp = current.next; 
-            current.next = prev; 
-            prev = current; 
-            current = temp; 
-        }
-        return prev;
-    }
     public ListNode reverseKGroup(ListNode head, int k) {
-        if(head == null || head.next == null || k <= 0) return head;
-        ListNode dummy = new ListNode(0);
-        dummy.next = head;
-        ListNode curr = dummy;
-        while(curr != null){
-           ListNode temp = curr;
-           for(int i = 0; i < k; i++){
-                temp = temp.next;
-                if(temp == null) return dummy.next;
-           }
-           ListNode st = curr.next;
-           ListNode nst = temp.next;
-           temp.next = null;
-           curr.next = reverseList(st);
-           st.next = nst;
-           curr = st;
+        ListNode temp = head;
+        int c = 0;
+        while(temp!=null && c<k){
+            c++;
+            temp = temp.next;
         }
-        return dummy.next;
+        temp = head;
+        ListNode prev = null;
+        if(c==k){
+            ListNode next = null;
+            for(int i=0;i<k;i++){
+                next = temp.next;
+                temp.next = prev;
+                prev= temp;
+                temp = next;
+            }
+            head.next = reverseKGroup(temp,k);
+            return prev;
+        }
+        return head;
     }
 }
