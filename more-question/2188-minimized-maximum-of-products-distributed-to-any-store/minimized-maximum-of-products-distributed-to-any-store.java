@@ -16,7 +16,8 @@ class Solution {
         int count = 0;
         if(mid==0) return false;
         for(int i:nums){
-            count+=Math.ceil((double)i/(mid));
+            // count+=Math.ceil((double)i/(mid));
+            count+=(i+mid-1)/mid;
         }
         return count<=k;
     }
