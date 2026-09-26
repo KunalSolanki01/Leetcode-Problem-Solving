@@ -18,6 +18,8 @@ class Solution {
     public int minCameraCover(TreeNode root) {
         min = 0;
         if(helper(root)==0) min++;
+        // helper(root);
+        // if(min==0) min++;
         return min;
     }
     public int helper(TreeNode root){
