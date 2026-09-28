@@ -63,8 +63,8 @@
 class Solution {
     public static class Pair{
         TreeNode node;
-        long idx;
-        Pair(TreeNode node, long idx){
+        int idx;
+        Pair(TreeNode node, int idx){
             this.node  = node;
             this.idx = idx;
         }
@@ -72,16 +72,16 @@ class Solution {
     public int widthOfBinaryTree(TreeNode root) {
         if(root == null) return 0;
         Queue<Pair> q = new ArrayDeque<>();
-        q.add(new Pair(root,0l));
-        long max = 0;
+        q.add(new Pair(root,0));
+        int max = 0;
         while(!q.isEmpty()){
             int n = q.size();
-            long min = q.peek().idx;
-            long st = 0, end = 0;
+            int min = q.peek().idx;
+            int st = 0, end = 0;
             for(int i = 0; i < n; i++){
                 Pair curr = q.poll();
                 TreeNode node = curr.node;
-                long index = curr.idx - min;
+                int index = curr.idx - min;
                 if(i == 0) st = index;
                 if(i == n-1) end = index;
                 if(node.left != null){
