@@ -7,7 +7,8 @@ class Solution {
             for(int j=0;j<n;j++){
                 if(mat[i][j]==0){
                     dq.add(new int[]{i,j});
-                }else mat[i][j] = -1;
+                }
+                // else mat[i][j] = -1;
             }
         }
         boolean [][]flag = new boolean[m][n];
@@ -21,7 +22,8 @@ class Solution {
                 for(int k=0;k<4;k++){
                     int x = temp[0] + r[k];
                     int y = temp[1] + c[k];
-                    if(x>=0 && y>=0 && x<m && y<n && mat[x][y]==-1){
+                    if(x>=0 && y>=0 && x<m && y<n && mat[x][y]==1 && !flag[x][y]){
+                        flag[x][y] = true;
                         mat[x][y] = level+1;
                         dq.add(new int[]{x,y});
                     }
