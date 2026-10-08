@@ -13,11 +13,11 @@ class Solution {
         return true;
     }
 
-    public boolean bfs(int[][] graph, int start, boolean[] vis, int[] depth) {
-        Queue<Integer> q = new LinkedList<>();
-        q.add(start);
-        vis[start] = true;
-        depth[start] = 0;
+    public boolean bfs(int[][] graph, int st, boolean[] vis, int[] depth) {
+        Queue<Integer> q = new ArrayDeque<>();
+        q.add(st);
+        vis[st] = true;
+        depth[st] = 0;
         while (!q.isEmpty()) {
             int node = q.poll();
             for (int nbr : graph[node]) {
