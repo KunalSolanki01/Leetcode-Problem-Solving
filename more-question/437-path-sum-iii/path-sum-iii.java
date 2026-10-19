@@ -14,16 +14,17 @@
  * }
  */
 class Solution {
-    public int helper(TreeNode root,long x){
+    public int dfs(TreeNode root,int target,long sum){
         if(root==null) return 0;
-        int a = 0;
-        if(root.val==x) a++;
-        a+=(helper(root.left,x-root.val));
-        a+=(helper(root.right,x-root.val));
-        return a;
+        int count = 0;
+        sum+=root.val;
+        if(sum==target) count+=1;
+        int a = dfs(root.left,target,sum);
+        int b = dfs(root.right,target,sum);
+        return count+a+b;
     }
     public int pathSum(TreeNode root, int targetSum) {
-        if(root == null) return 0;
-        return helper(root,targetSum)+pathSum(root.left,targetSum)+pathSum(root.right,targetSum);
+        if(root==null) return 0;
+        return pathSum(root.left,targetSum)+pathSum(root.right,targetSum)+dfs(root,targetSum,0);
     }
 }
