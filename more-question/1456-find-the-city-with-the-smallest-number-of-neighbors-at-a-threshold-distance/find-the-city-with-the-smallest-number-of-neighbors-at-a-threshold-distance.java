@@ -32,7 +32,7 @@ class Solution {
         for (int i = 0; i < n; i++) {
             int cur = 0;
             for (int j = 0; j < n; j++) {
-                if ( edges[i][j] <= distanceThreshold+1)
+                if (i!=j && edges[i][j] <= distanceThreshold+1)
                     cur++;
             }
             if (cur <= min) {
