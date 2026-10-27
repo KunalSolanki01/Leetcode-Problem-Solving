@@ -12,7 +12,6 @@ class Solution {
             return;
         }
         String x = nums[digits.charAt(idx)-'2'];
-        // System.out.print(x + " ");
         for(char c:x.toCharArray()){
             cur.append(c);
             helper(res,digits,nums,cur,idx+1);
