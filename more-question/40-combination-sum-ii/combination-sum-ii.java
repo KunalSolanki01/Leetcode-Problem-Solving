@@ -1,7 +1,5 @@
 class Solution {
     public void helper(List<List<Integer>> ans,List<Integer> temp,int[] arr,int target,int sum,int idx){
-        // if(idx==arr.length) return;
-        // if(ans.contains(temp)) return;
         if(sum==target){
             ans.add(new ArrayList<>(temp));
             return;
@@ -13,7 +11,6 @@ class Solution {
             helper(ans,temp,arr,target,sum+arr[i],i+1);
             temp.remove(temp.size()-1);
         }
-        return;
     }
     public List<List<Integer>> combinationSum2(int[] candidates, int target) {
         Arrays.sort(candidates);
