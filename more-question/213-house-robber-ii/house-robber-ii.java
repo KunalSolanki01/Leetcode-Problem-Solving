@@ -1,20 +1,20 @@
 class Solution {
-    int dp[];
     public int rob(int[] nums) {
         int n = nums.length;
         if (n == 1) return nums[0];
-        dp = new int[n+1];
-        Arrays.fill(dp,-1);
         int ans1 = solve(nums, 0, n - 2);
-        Arrays.fill(dp,-1);
         int ans2 = solve(nums, 1, n - 1);
-        return Math.max(ans1,ans2);
+        return Math.max(ans1, ans2);
     }
+
     public int solve(int[] nums, int start, int end) {
-        if(start>end) return 0;
-        if(dp[start]!=-1) return dp[start];
-        int rob = nums[start] + solve(nums,start+2,end);
-        int not = solve(nums,start+1,end);
-        return dp[start] = Math.max(rob,not);
+        int n = end - start + 1;
+        int[] dp = new int[n + 2];
+        for (int i = n - 1; i >= 0; i--) {
+            int rob = nums[start + i] + dp[i + 2];
+            int not = dp[i + 1];
+            dp[i] = Math.max(rob, not);
+        }
+        return dp[0];
     }
 }
