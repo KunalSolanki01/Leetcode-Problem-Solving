@@ -1,13 +1,11 @@
 class Solution {
     int[][] dp;
+    int max = Integer.MAX_VALUE-1;
     public int helper(int[] coins, int amount, int idx) {
-        if (amount < 0) return 100000000; 
+        if (amount < 0) return max; 
         if (idx == 0) {
-            if (amount % coins[0] == 0) {
-                return amount / coins[0];
-            } else {
-                return 100000000;
-            }
+            if (amount % coins[0] == 0) return amount / coins[0];
+            return max;
         }
         if (dp[idx][amount] != -1) return dp[idx][amount]; 
         int take = 1 + helper(coins, amount - coins[idx], idx);
@@ -23,10 +21,9 @@ class Solution {
             return 0;
         }
         int ans = helper(coins, amount, coins.length - 1);
-        if (ans >= 100000000) {
+        if (ans >= max) {
             return -1;
         }
-        System.gc();
         return ans;
     }
 }
